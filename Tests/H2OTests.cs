@@ -1,4 +1,5 @@
 ﻿using NUnit.Framework;
+using System;
 
 namespace H2OLib.Test
 {
@@ -27,6 +28,12 @@ namespace H2OLib.Test
             var h2o = new H2O(H2O.State.Solid);
             Assert.That(h2o.MinTemp, Is.EqualTo(-230));
             Assert.That(h2o.MaxTemp, Is.EqualTo(0));
+        }
+
+        [Test]
+        public void GivenUnknownStateThenExceptionThrown()
+        {
+            Assert.Throws<ArgumentOutOfRangeException>(() => new H2O((H2O.State)99));
         }
     }
 }
