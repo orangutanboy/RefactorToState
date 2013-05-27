@@ -1,4 +1,5 @@
-﻿namespace H2OLib
+﻿using System;
+namespace H2OLib
 {
     public class H2O
     {
@@ -13,6 +14,10 @@
 
         public H2O(State state)
         {
+            if (state != State.Gas && state != State.Liquid && state != State.Solid)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
             _state = state;
         }
 
@@ -34,16 +39,18 @@
 
         public int MinTemp
         {
-            get{
-            switch (_state)
+            get
             {
-                case State.Gas:
-                    return 100;
-                case State.Liquid:
-                    return 0;
-                default:
-                    return -230;
-            }}
+                switch (_state)
+                {
+                    case State.Gas:
+                        return 100;
+                    case State.Liquid:
+                        return 0;
+                    default:
+                        return -230;
+                }
+            }
         }
     }
 }
