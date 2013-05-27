@@ -1,4 +1,5 @@
 ﻿using System;
+
 namespace H2OLib
 {
     public class H2O
@@ -10,30 +11,19 @@ namespace H2OLib
             Solid
         }
 
-        private readonly State _state;
+        private readonly IState _state;
 
         public H2O(State state)
         {
-            if (state != State.Gas && state != State.Liquid && state != State.Solid)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-            _state = state;
+            var factory = new StateFactory();
+            _state = factory.CreateState(state);
         }
 
         public int MaxTemp
         {
             get
             {
-                switch (_state)
-                {
-                    case State.Gas:
-                        return 374;
-                    case State.Liquid:
-                        return 100;
-                    default:
-                        return 0;
-                }
+                return _state.MaxTemp;
             }
         }
 
@@ -41,15 +31,7 @@ namespace H2OLib
         {
             get
             {
-                switch (_state)
-                {
-                    case State.Gas:
-                        return 100;
-                    case State.Liquid:
-                        return 0;
-                    default:
-                        return -230;
-                }
+                return _state.MinTemp;
             }
         }
     }

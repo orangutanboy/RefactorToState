@@ -35,8 +35,13 @@
     <Reference Include="Microsoft.CSharp" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GasState.cs" />
     <Compile Include="H2O.cs" />
+    <Compile Include="IState.cs" />
+    <Compile Include="LiquidState.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SolidState.cs" />
+    <Compile Include="StateFactory.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
