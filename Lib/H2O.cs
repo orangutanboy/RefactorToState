@@ -4,6 +4,8 @@ namespace H2OLib
 {
     public class H2O
     {
+        private static StateFactory _stateFactory = new StateFactory();
+
         public enum State
         {
             Gas,
@@ -15,8 +17,7 @@ namespace H2OLib
 
         public H2O(State state)
         {
-            var factory = new StateFactory();
-            _state = factory.CreateState(state);
+            _state = _stateFactory.CreateState(state);
         }
 
         public int MaxTemp
@@ -49,17 +50,14 @@ namespace H2OLib
             switch (state)
             {
                 case H2O.State.Gas:
-                    {
-                        return new GasState();
-                    }
+                    return new GasState();
+
                 case H2O.State.Liquid:
-                    {
-                        return new LiquidState();
-                    }
+                    return new LiquidState();
+
                 case H2O.State.Solid:
-                    {
-                        return new SolidState();
-                    }
+                    return new SolidState();
+
                 default:
                     throw new ArgumentOutOfRangeException();
             }
@@ -104,5 +102,4 @@ namespace H2OLib
             get { return 0; }
         }
     }
-
 }
